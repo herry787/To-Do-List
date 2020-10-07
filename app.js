@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistdb",{useNewUrlParser:true},{ useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin-Harsh:Harsh2000@cluster0.yrqdg.mongodb.net/todolistdb",{useNewUrlParser:true},{ useUnifiedTopology: true });
 //so in below line as you see we declare item schema which tells database on what structure
 // did data has to be saved
 const itemschema={name:String}
@@ -33,7 +33,7 @@ const item1=new Item({
 const item2=new Item({
   name:"Hit the + button to add new item"})
 const item3=new Item({
-  name:"Hit these to delete The items"})
+  name:"<---- Hit these to delete The items"})
 //this default item array is used to store items and basically we add some item  from starting 
 
 const defaultitem=[item1,item2,item3];
@@ -143,6 +143,12 @@ else{
  });
 }
 })
-app.listen(3000, function() {
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port);
+
+app.listen(port, function() {
   console.log("Server started on port 3000");
 });
